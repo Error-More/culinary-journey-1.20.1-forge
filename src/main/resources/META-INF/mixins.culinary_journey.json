@@ -1,0 +1,13 @@
+{
+  "required": false,
+  "minVersion": "0.8.5",
+  "package": "com.culinary_journey.mixin.container",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "culinary_journey.refmap.json",
+  "mixins": [
+    "WindowTitleMixin",
+    "PackRepositoryMixin"
+  ],
+  "client": [],
+  "server": []
+}
