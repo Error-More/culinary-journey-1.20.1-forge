@@ -1,4 +1,4 @@
-package com.culinary_journey.mixin.container;
+package com.culinary_journey.mixin;
 
 import com.culinary_journey.core.WindowTitle;
 import com.mojang.blaze3d.platform.Window;

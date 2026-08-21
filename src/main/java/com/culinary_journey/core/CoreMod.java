@@ -2,7 +2,6 @@ package com.culinary_journey.core;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import com.culinary_journey.core.WindowTitle;
 
 // 入口
 @Mod(CoreMod.MODID)
