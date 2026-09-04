@@ -1,4 +1,4 @@
-package com.culinary_journey.i18n.create;
+package top.bk.culinary_journey.integration.create;
 
 import com.electronwill.nightconfig.core.Config;
 import com.mojang.logging.LogUtils;
@@ -10,6 +10,7 @@ import net.minecraftforge.fml.config.ConfigTracker;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.slf4j.Logger;
+import top.bk.culinary_journey.Culinary_journey;
 
 import java.io.InputStream;
 import java.lang.reflect.Field;
@@ -21,7 +22,7 @@ import java.util.Locale;
 import java.util.Map;
 
 // 机械动力配置页面注释汉化
-@Mod.EventBusSubscriber(modid = "culinary_journey", bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Culinary_journey.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ConfigPage {
 
     private static final Logger LOGGER = LogUtils.getLogger();
@@ -39,7 +40,7 @@ public class ConfigPage {
     private static void loadTable() {
         try {
             java.net.URL url = ConfigPage.class.getClassLoader()
-                    .getResource("assets/culinary_journey/i18n/create/ConfigPageComments/zh_cn.json");
+                    .getResource("assets/culinary_journey/integration/create/configpage/zh_cn.json");
             if (url != null) {
                 try (InputStream in = url.openStream()) {
                     String json = new String(in.readAllBytes(), StandardCharsets.UTF_8);

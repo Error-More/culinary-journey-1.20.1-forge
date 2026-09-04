@@ -1,4 +1,4 @@
-package com.culinary_journey.compat;
+package top.bk.culinary_journey.integration.thirst;
 
 import cn.mlus.thirst.foundation.config.CommonConfig;
 import net.minecraft.world.item.Item;
@@ -6,6 +6,7 @@ import net.minecraft.world.item.Items;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
+// Thirst 兼容：按配置调整水瓶堆叠上限
 public class ItemStackModifier {
 
     public static void init() {

@@ -1,4 +1,4 @@
-package com.culinary_journey.core;
+package top.bk.culinary_journey.client;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.loading.FMLPaths;
 import org.slf4j.Logger;
+import top.bk.culinary_journey.Culinary_journey;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -23,7 +24,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 // 窗口标题逻辑
-@Mod.EventBusSubscriber(modid = CoreMod.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Culinary_journey.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class WindowTitle {
 
     private static final Logger LOGGER = LogUtils.getLogger();

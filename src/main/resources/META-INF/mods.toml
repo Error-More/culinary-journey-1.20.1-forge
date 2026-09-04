@@ -23,7 +23,7 @@ displayName = "${mod_name}" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://docs.minecraftforge.net/en/latest/misc/updatechecker/
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
-#displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
+displayURL = "https://www.mcmod.cn/modpack/1068.html" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 #logoFile="culinary_journey.png" #optional
 # A text field displayed in the mod UI
@@ -62,7 +62,7 @@ versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
-# Thirst 模组：提供 Purity 机制。非强制依赖（未安装时配方覆盖/清理不生效）。
+# Thirst
 [[dependencies."${mod_id}"]]
 modId = "thirst"
 mandatory = false
@@ -70,7 +70,7 @@ versionRange = "*"
 ordering = "AFTER"
 side = "BOTH"
 
-# FTB Ultimine 模组
+# FTB Ultimine
 [[dependencies."${mod_id}"]]
 modId = "ftbultimine"
 mandatory = false
@@ -78,6 +78,6 @@ versionRange = "*"
 ordering = "AFTER"
 side = "BOTH"
 
-# Mixin 配置（拦截从容器取出水容器时清除 Purity 的入口）
+# Mixin
 [[mixins]]
-config = "META-INF/mixins.culinary_journey.json"
+config = "culinary_journey.mixins.json"

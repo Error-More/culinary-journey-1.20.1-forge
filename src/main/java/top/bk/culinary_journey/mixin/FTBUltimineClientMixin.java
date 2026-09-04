@@ -1,10 +1,9 @@
-package com.culinary_journey.mixin;
+package top.bk.culinary_journey.mixin;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import dev.ftb.mods.ftblibrary.snbt.config.IntValue;
 import dev.ftb.mods.ftbultimine.CooldownTracker;
-import dev.ftb.mods.ftbultimine.client.FTBUltimineClient;
 import dev.ftb.mods.ftbultimine.config.FTBUltimineClientConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -20,8 +19,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mixin(FTBUltimineClient.class)
-public class MixinFTBUltimineClient {
+// FTB Ultimine 覆盖层编辑
+@Mixin(dev.ftb.mods.ftbultimine.client.FTBUltimineClient.class)
+public class FTBUltimineClientMixin {
 
     private static IntValue yOffset = FTBUltimineClientConfig.CONFIG.addInt("y_offset", -1).comment(new String[]{"Manual y offset of FTB Ultimine overlay, required for some modpacks"});
 
