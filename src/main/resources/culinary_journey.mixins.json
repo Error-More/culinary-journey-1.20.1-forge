@@ -1,14 +1,14 @@
 {
   "required": true,
   "minVersion": "0.8.5",
-  "package": "top.bk.culinary_journey.mixin",
+  "package": "top.bk.culinaryjourney.mixin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "culinary_journey.refmap.json",
   "mixins": [
   ],
   "client": [
-    "FTBUltimineClientMixin",
-    "WindowTitleMixin"
+    "MixinFTBUltimineClient",
+    "MixinWindowTitle"
   ],
   "injectors": {
     "defaultRequire": 1

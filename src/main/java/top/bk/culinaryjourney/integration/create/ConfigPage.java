@@ -1,7 +1,6 @@
-package top.bk.culinary_journey.integration.create;
+package top.bk.culinaryjourney.integration.create;
 
 import com.electronwill.nightconfig.core.Config;
-import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -9,8 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ConfigTracker;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import org.slf4j.Logger;
-import top.bk.culinary_journey.Culinary_journey;
+import top.bk.culinaryjourney.CulinaryJourney;
 
 import java.io.InputStream;
 import java.lang.reflect.Field;
@@ -22,10 +20,9 @@ import java.util.Locale;
 import java.util.Map;
 
 // 机械动力配置页面注释汉化
-@Mod.EventBusSubscriber(modid = Culinary_journey.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = CulinaryJourney.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ConfigPage {
 
-    private static final Logger LOGGER = LogUtils.getLogger();
     private static final String MARKER = "[I18nCreate]";
     private static volatile boolean APPLIED = false;
 
@@ -35,7 +32,7 @@ public class ConfigPage {
         event.enqueueWork(ConfigPage::applyChinese);
     }
 
-    private static Map<String, String> COMMENT_TABLE = new LinkedHashMap<>();
+    private static final Map<String, String> COMMENT_TABLE = new LinkedHashMap<>();
 
     private static void loadTable() {
         try {
@@ -48,13 +45,13 @@ public class ConfigPage {
                     if (root.isJsonObject()) {
                         flatten(root.getAsJsonObject(), "", COMMENT_TABLE);
                     }
-                    LOGGER.info("{} loaded {} comment entries from jar resource", MARKER, COMMENT_TABLE.size());
+                    CulinaryJourney.LOGGER.info("{} loaded {} comment entries from jar resource", MARKER, COMMENT_TABLE.size());
                 }
             } else {
-                LOGGER.info("{} comment table not found in jar resource", MARKER);
+                CulinaryJourney.LOGGER.info("{} comment table not found in jar resource", MARKER);
             }
         } catch (Throwable t) {
-            LOGGER.info("{} loadTable failed: {}", MARKER, t.toString());
+            CulinaryJourney.LOGGER.info("{} loadTable failed: {}", MARKER, t.toString());
         }
     }
 
@@ -104,8 +101,8 @@ public class ConfigPage {
             }
         }
         APPLIED = true;
-        LOGGER.info("{} applyChinese: total={} matched={} applied={}", MARKER, total, matched, applied);
-        LOGGER.info("{}", diag.toString());
+        CulinaryJourney.LOGGER.info("{} applyChinese: total={} matched={} applied={}", MARKER, total, matched, applied);
+        CulinaryJourney.LOGGER.info("{}", diag.toString());
     }
 
     private static boolean setComment(ForgeConfigSpec.ValueSpec vs, String comment) {
@@ -150,7 +147,7 @@ public class ConfigPage {
             if (storage == null) return result;
             collectValueSpecs(storage, "", result);
         } catch (Throwable t) {
-            LOGGER.info("{} findValueSpecs failed: {}", MARKER, t.toString());
+            CulinaryJourney.LOGGER.info("{} findValueSpecs failed: {}", MARKER, t.toString());
         }
         return result;
     }
@@ -173,7 +170,7 @@ public class ConfigPage {
                 }
             }
         } catch (Throwable t) {
-            LOGGER.info("{} collectValueSpecs failed: {}", MARKER, t.toString());
+            CulinaryJourney.LOGGER.info("{} collectValueSpecs failed: {}", MARKER, t.toString());
         }
     }
 
@@ -196,7 +193,7 @@ public class ConfigPage {
                 }
             }
         } catch (Throwable t) {
-            LOGGER.info("{} findCreateConfigs failed: {}", MARKER, t.toString());
+            CulinaryJourney.LOGGER.info("{} findCreateConfigs failed: {}", MARKER, t.toString());
         }
         return result;
     }

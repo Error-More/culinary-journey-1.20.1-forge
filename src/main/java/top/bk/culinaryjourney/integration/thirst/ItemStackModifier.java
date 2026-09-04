@@ -1,4 +1,4 @@
-package top.bk.culinary_journey.integration.thirst;
+package top.bk.culinaryjourney.integration.thirst;
 
 import cn.mlus.thirst.foundation.config.CommonConfig;
 import net.minecraft.world.item.Item;
@@ -6,7 +6,7 @@ import net.minecraft.world.item.Items;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
-// Thirst 兼容：按配置调整水瓶堆叠上限
+//Thirst compat fix: 直接修改 Item 的 maxStackSize 字段，排除原本口渴值直接 Mixin 可能导致的兼容与不生效问题
 public class ItemStackModifier {
 
     public static void init() {

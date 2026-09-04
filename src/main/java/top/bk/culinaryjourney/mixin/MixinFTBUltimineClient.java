@@ -1,4 +1,4 @@
-package top.bk.culinary_journey.mixin;
+package top.bk.culinaryjourney.mixin;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -19,19 +19,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-// FTB Ultimine 覆盖层编辑
-@Mixin(dev.ftb.mods.ftbultimine.client.FTBUltimineClient.class)
-public class FTBUltimineClientMixin {
+// FTB Ultimine compat: 实现了 FTB Ultimine 在 renderGameOverlay 中的 TODO (指调整 HUD 的位置)
+@Mixin(value = dev.ftb.mods.ftbultimine.client.FTBUltimineClient.class, remap = false)
+public class MixinFTBUltimineClient {
 
-    private static IntValue yOffset = FTBUltimineClientConfig.CONFIG.addInt("y_offset", -1).comment(new String[]{"Manual y offset of FTB Ultimine overlay, required for some modpacks"});
+    private static final IntValue yOffset = FTBUltimineClientConfig.CONFIG.addInt("y_offset", -1).comment(new String[]{"Manual y offset of FTB Ultimine overlay, required for some modpacks"});
 
-    @Shadow(remap = false)
+    @Shadow
     private void addPressedInfo(List<MutableComponent> list) {}
 
-    @Shadow(remap = false)
+    @Shadow
     private boolean pressed;
 
-    @Inject(method = "renderGameOverlay", at = @At("HEAD"), cancellable = true, remap = false)
+    @Inject(method = "renderGameOverlay", at = @At("HEAD"), cancellable = true)
     public void renderGameOverlay(GuiGraphics graphics, float tickDelta, CallbackInfo ci) {
         if (!ModList.get().isLoaded("ftbultimine")) return;
 
