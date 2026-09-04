@@ -70,6 +70,14 @@ versionRange = "*"
 ordering = "AFTER"
 side = "BOTH"
 
+# FTB Ultimine 模组
+[[dependencies."${mod_id}"]]
+modId = "ftbultimine"
+mandatory = false
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
+
 # Mixin 配置（拦截从容器取出水容器时清除 Purity 的入口）
 [[mixins]]
 config = "META-INF/mixins.culinary_journey.json"
