@@ -1,4 +1,8 @@
 {
   "ftbultimine.client_settings.x_offset": "Render Offset X",
-  "ftbultimine.client_settings.y_offset": "Render Offset Y"
+  "ftbultimine.client_settings.y_offset": "Render Offset Y",
+  "culinary_journey.windowtitle.base": "The Culinary Journey",
+  "culinary_journey.windowtitle.multiplayer": "Feast with Friends",
+  "culinary_journey.windowtitle.lan": "Inviting Companions",
+  "culinary_journey.windowtitle.solo": "Lonely Journey"
 }

@@ -1,4 +1,8 @@
 {
   "ftbultimine.client_settings.x_offset": "X轴渲染偏移",
-  "ftbultimine.client_settings.y_offset": "Y轴渲染偏移"
+  "ftbultimine.client_settings.y_offset": "Y轴渲染偏移",
+  "culinary_journey.windowtitle.base": "美食的旅途",
+  "culinary_journey.windowtitle.multiplayer": "众友盛宴",
+  "culinary_journey.windowtitle.lan": "邀约众友",
+  "culinary_journey.windowtitle.solo": "孤独旅途"
 }
