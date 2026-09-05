@@ -36,7 +36,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class WindowTitle {
 
     /** 日志前缀 */
-    private static final String MARKER = "CulinaryJourney/WindowTitle";
+    private static final String MARKER = "[WindowTitle]";
 
     /** 标题无版本基础部分的国际化键 */
     private static final String I18N_TITLE_BASE = "culinary_journey.windowtitle.base";

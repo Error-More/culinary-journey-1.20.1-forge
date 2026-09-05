@@ -4,8 +4,8 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import com.mojang.logging.LogUtils;
-import org.slf4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import top.bk.culinaryjourney.integration.thirst.ItemStackModifier;
 
 /**
@@ -19,8 +19,8 @@ public class CulinaryJourney {
     /** 模组 ID，同时用作资源命名空间 */
     public static final String MOD_ID = "culinary_journey";
 
-    /** 模组日志器，以主类全限定名命名 */
-    public static final Logger LOGGER = LogUtils.getLogger();
+    /** 模组日志器，日志前缀为模组 ID */
+    public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     /**
      * 模组构造入口，由 FML 在模组加载阶段调用。
