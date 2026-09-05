@@ -27,10 +27,6 @@ import java.util.Map;
  * 因此这里在配置界面打开之前，用反射把该字段逐个替换成中文
  *
  * 汉化只影响配置 GUI 的显示，不会写回 Create 的配置文件
- *
- * 仅客户端运行
- *
- * @since 1.0.0
  */
 @Mod.EventBusSubscriber(modid = CulinaryJourney.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ConfigPage {

@@ -29,8 +29,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * 仅负责计算标题，写入系统窗口由 {@link top.bk.culinaryjourney.mixin.MixinWindowTitle} 完成。
  *
  * 事件里只置标记，刷新统一推迟到下一个 tick
- *
- * @since 1.0.0
  */
 @Mod.EventBusSubscriber(modid = CulinaryJourney.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class WindowTitle {

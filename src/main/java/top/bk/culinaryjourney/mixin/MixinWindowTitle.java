@@ -12,8 +12,6 @@ import top.bk.culinaryjourney.client.WindowTitle;
  * 接管 {@code Window#setTitle}，把标题替换为 {@link WindowTitle} 计算出的动态标题
  *
  * 选 {@code setTitle} 作为注入点， Minecraft 会在启动、切换语言、进出世界等时机主动调用它，在此拦截并取消原实现
- *
- * @since 1.0.0
  */
 @Mixin(Window.class)
 public class MixinWindowTitle {
