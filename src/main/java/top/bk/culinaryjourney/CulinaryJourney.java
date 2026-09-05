@@ -9,23 +9,25 @@ import org.apache.logging.log4j.Logger;
 import top.bk.culinaryjourney.integration.thirst.ItemStackModifier;
 
 /**
- * 模组主入口类。
- *
- * @since 1.0.0
+ * 模组入口主类.
  */
 @Mod(CulinaryJourney.MOD_ID)
 public class CulinaryJourney {
 
-    /** 模组 ID，同时用作资源命名空间 */
+    /**
+     * 静态 Mod ID 常量.
+     */
     public static final String MOD_ID = "culinary_journey";
 
-    /** 模组日志器，日志前缀为模组 ID */
+    /**
+     * Mod Logger, 注册模组专属 Logger, 名称使用 Mod ID.
+     */
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     /**
-     * 模组构造入口，由 FML 在模组加载阶段调用。
+     * 入口主类的构造函数: 由 FML 在模组加载阶段调用.
      *
-     * @param context 模组加载上下文，提供本模组专属的事件总线
+     * @param context 模组加载上下文, 包含模组专属的事件总线
      */
     public CulinaryJourney(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
@@ -34,15 +36,15 @@ public class CulinaryJourney {
     }
 
     /**
-     * 执行与其他模组的兼容补丁。
+     * 兼容性修复补丁初始化事件.
      *
-     * 为何必须用 {@code enqueueWork} 包装：{@link FMLCommonSetupEvent} 会与其他模组并行派发，
-     * 而这里的补丁要读写别的模组的类。直接执行会抢在目标模组初始化完成之前，
-     * 排入队列后才会串行执行，从而保证依赖已就绪。
+     * {@link FMLCommonSetupEvent} 属于 ForgeMod 的生命周期事件之一.
+     * 绝大多数生命周期时间都是并行的, 因此 {@link FMLCommonSetupEvent} 会被多个 Mod 同时接收.
+     * 为了保证线程安全, 需要使用 {@link FMLCommonSetupEvent#enqueueWork(Runnable)} 来调用.
      *
-     * @param event 公共初始化事件
+     * @param e 事件实例
      */
-    private void compatSetup(FMLCommonSetupEvent event) {
-        event.enqueueWork(ItemStackModifier::init);
+    private void compatSetup(FMLCommonSetupEvent e) {
+        e.enqueueWork(ItemStackModifier::init);
     }
 }

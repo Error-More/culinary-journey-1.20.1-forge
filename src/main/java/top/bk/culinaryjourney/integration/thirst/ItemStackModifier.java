@@ -7,44 +7,39 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
 /**
- * Thirst（口渴值）兼容补丁：把药水的最大堆叠数同步为 Thirst 配置中的水瓶堆叠数。
+ * Thirst 兼容性修复: 修复口渴值的水瓶堆叠兼容性问题.
  *
- * 什么用反射而不用 Mixin：Thirst 自身已通过 Mixin 改过 {@code Item} 的堆叠逻辑，
- * 本模组再叠一层 Mixin 会与它的注入顺序、生效时机互相覆盖，导致设置不稳定。
- * 直接反射改写字段是最短路径，也与 Thirst 的实现细节解耦。
- *
- * 这是全局修改，会影响所有模组中用到药水物品的场合。
- *
- * @since 1.0.0
+ * Thirst 原本通过 Mixin Inject {@link net.minecraft.world.item.ItemStack#getMaxStackSize} HEAD 修改返回值实现.
+ * Mixin 修改返回值极有可能导致兼容问题, 此处通过反射直接更改 {@link net.minecraft.world.item.Item#maxStackSize} 提供 Fallback 方案,
  */
 public class ItemStackModifier {
 
     /**
-     * 应用补丁。仅在 Thirst 已加载时执行
+     * 初始化方法, 需要被手动调用
      */
     public static void init() {
+        // 确保 Thirst 已经被 ModLoader 加载
         if (ModList.get().isLoaded("thirst")) {
+            // 异常捕获 (即使 Thirst 已被加载, 直接的 API 调用仍然可能导致崩溃)
             try {
+                // 复用 Thirst 的配置项
                 setMaxStackSize(Items.POTION, CommonConfig.WATER_BOTTLE_STACKSIZE.get());
-            } catch (Exception ignored) {
-                // 兼容补丁失败不应阻碍游戏启动，最坏情况退化为原版堆叠数
-            }
+            } catch (Exception ignored) { }
         }
     }
 
     /**
-     * 反射改写物品的最大堆叠数。
+     * 改写物品的最大堆叠数 (通过反射).
      *
-     * @param item 目标物品实例
-     * @param size 新的最大堆叠数
+     * @see ObfuscationReflectionHelper
+     * @param item 目标物品
+     * @param size 最大堆叠数
      */
     private static void setMaxStackSize(Item item, int size) {
         try {
             // "f_41370_" 是 Item#maxStackSize 的 SRG 混淆名
             ObfuscationReflectionHelper.setPrivateValue(Item.class, item, size, "f_41370_");
         }
-        catch (Exception ignored) {
-            // 反射失败静默处理
-        }
+        catch (Exception ignored) { }
     }
 }
