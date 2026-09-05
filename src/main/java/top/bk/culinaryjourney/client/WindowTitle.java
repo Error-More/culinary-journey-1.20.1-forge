@@ -1,6 +1,5 @@
 package top.bk.culinaryjourney.client;
 
-import com.mojang.logging.LogUtils;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -13,7 +12,6 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.loading.FMLPaths;
-import org.slf4j.Logger;
 import top.bk.culinaryjourney.CulinaryJourney;
 
 import java.io.IOException;
@@ -36,9 +34,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 @Mod.EventBusSubscriber(modid = CulinaryJourney.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class WindowTitle {
-
-    /** 日志器 */
-    private static final Logger LOGGER = LogUtils.getLogger();
 
     /** 日志前缀 */
     private static final String MARKER = "CulinaryJourney/WindowTitle";
@@ -384,7 +379,7 @@ public class WindowTitle {
                     .findFirst()
                     .orElse("");
         } catch (IOException e) {
-            LOGGER.info("{} 读取版本文件失败：{}", MARKER, e.toString());
+            CulinaryJourney.LOGGER.info("{} failed to read version file: {}", MARKER, e.toString());
             return "";
         }
     }
