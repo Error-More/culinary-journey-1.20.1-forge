@@ -78,6 +78,14 @@ versionRange = "*"
 ordering = "AFTER"
 side = "BOTH"
 
+# FTB Backups 2
+[[dependencies."${mod_id}"]]
+modId = "ftbbackups2"
+mandatory = false
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
+
 # Mixin
 [[mixins]]
 config = "culinary_journey.mixins.json"

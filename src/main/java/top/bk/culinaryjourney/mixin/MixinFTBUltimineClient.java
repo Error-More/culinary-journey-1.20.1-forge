@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import dev.ftb.mods.ftblibrary.snbt.config.IntValue;
 import dev.ftb.mods.ftbultimine.CooldownTracker;
+import dev.ftb.mods.ftbultimine.client.FTBUltimineClient;
 import dev.ftb.mods.ftbultimine.config.FTBUltimineClientConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -12,6 +13,7 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraftforge.fml.ModList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -20,11 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * FTB Ultimine 兼容性修复: 实现 {@link dev.ftb.mods.ftbultimine.client.FTBUltimineClient#renderGameOverlay} 的 TODO (允许配置 HUD 位置偏移).
+ * FTB Ultimine 兼容性修复: 实现 {@link FTBUltimineClient#renderGameOverlay(GuiGraphics, float)} 的 TODO (允许配置 HUD 位置偏移).
  *
  * 通过 Mixin Inject 注入 {@code renderGameOverlay} 方法的 HEAD 跳过原本逻辑重新实现.
  */
-@Mixin(value = dev.ftb.mods.ftbultimine.client.FTBUltimineClient.class, remap = false)
+@Mixin(value = FTBUltimineClient.class, remap = false)
 public class MixinFTBUltimineClient {
 
     /**
@@ -33,12 +35,13 @@ public class MixinFTBUltimineClient {
      * 复用 FTB Ultimine 的 Config 接口, 可以直接通过 FTB Library 的 UI 界面进行配置.
      * 哨兵值约定: 沿用 FTB 的逻辑 {@code -1} -1 表示未设置, 此时沿用原 FTB Ultimine 的默认位置 (2).
      */
-    private static final IntValue yOffset = FTBUltimineClientConfig.CONFIG.addInt("y_offset", -1).comment(new String[]{"Manual y offset of FTB Ultimine overlay, required for some modpacks"});
+    @Unique
+    private static final IntValue culinary_journey_1_20_1_forge$yOffset = FTBUltimineClientConfig.CONFIG.addInt("y_offset", -1).comment(new String[]{"Manual y offset of FTB Ultimine overlay, required for some modpacks"});
 
     /**
      * 按顺序把当前要显示的文本填入 {@code List}
      *
-     * @see dev.ftb.mods.ftbultimine.client.FTBUltimineClient#addPressedInfo(List)
+     * @see FTBUltimineClient#addPressedInfo(List)
      * @param list 填充的 list
      */
     @Shadow
@@ -47,13 +50,13 @@ public class MixinFTBUltimineClient {
     /**
      * 是否按下 FTB Ultimine 的功能键.
      *
-     * @see dev.ftb.mods.ftbultimine.client.FTBUltimineClient#pressed
+     * @see FTBUltimineClient#pressed
      */
     @Shadow
     private boolean pressed;
 
     /**
-     * Mixin Inject {@link dev.ftb.mods.ftbultimine.client.FTBUltimineClient#renderGameOverlay} 增加位置偏移逻辑.
+     * Mixin Inject {@link FTBUltimineClient#renderGameOverlay(GuiGraphics, float)} 增加位置偏移逻辑.
      *
      * @param graphics  GUI 绘制上下文
      * @param tickDelta 部分刻插值
@@ -77,7 +80,7 @@ public class MixinFTBUltimineClient {
 
                 // 检查 Offset 参数是否越界, 越界则 Fallback
                 int left = xOffset.get() >= 0 ? xOffset.get() : 2;
-                int top = yOffset.get() >= 0 ? yOffset.get() : 2;
+                int top = culinary_journey_1_20_1_forge$yOffset.get() >= 0 ? culinary_journey_1_20_1_forge$yOffset.get() : 2;
 
                 // 确保 HUD 的渲染不会超出范围
                 int maxTop = top + mc.font.lineHeight * list.size();

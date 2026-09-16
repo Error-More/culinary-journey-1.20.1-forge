@@ -177,9 +177,11 @@ dependencies {
     compileOnly "curse.maven:thirst-884742:8391907"
     compileOnly "curse.maven:ftblib-404465:8226927"
     compileOnly "curse.maven:ftbu-386134:7880472"
+    compileOnly "curse.maven:ftbbackup-622737:4834403"
     annotationProcessor "curse.maven:thirst-884742:8391907"
     annotationProcessor "curse.maven:ftblib-404465:8226927"
     annotationProcessor "curse.maven:ftbu-386134:7880472"
+    annotationProcessor "curse.maven:ftbbackup-622737:4834403"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
