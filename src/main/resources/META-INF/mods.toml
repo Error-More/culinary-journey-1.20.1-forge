@@ -62,6 +62,14 @@ versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
+# Curtain
+[[dependencies."${mod_id}"]]
+modId = "curtain"
+mandatory = false
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
+
 # Thirst
 [[dependencies."${mod_id}"]]
 modId = "thirst"

@@ -20,7 +20,7 @@ public class MixinBackupHandler {
      * Mixin ModifyVariable {@link BackupHandler#createBackup(MinecraftServer, boolean, String)} 修改 {@code backupName} 局部变量.
      *
      * @param originalName    原 backupName 的赋值, 由 {@link TieredBackupTest#getBackupName()} 获取的时间戳
-     * @param minecraftServer Minecraft Server 实例
+     * @param minecraftServer MinecraftServer 实例
      * @param protect         是否为受保护的 Backup (即不会被自动清理)
      * @param name            真正的 Backup Name 原本只被写入 Metadata, 更改为同时体现在 Backup Data
      */

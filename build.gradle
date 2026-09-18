@@ -174,10 +174,17 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
+    implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:0.2.0"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.2.0")) {
+        jarJar.ranged(it, "[0.2.0,)")
+    }
+
+    compileOnly "curse.maven:curtain-845348:4704521"
     compileOnly "curse.maven:thirst-884742:8391907"
     compileOnly "curse.maven:ftblib-404465:8226927"
     compileOnly "curse.maven:ftbu-386134:7880472"
     compileOnly "curse.maven:ftbbackup-622737:4834403"
+    annotationProcessor "curse.maven:curtain-845348:4704521"
     annotationProcessor "curse.maven:thirst-884742:8391907"
     annotationProcessor "curse.maven:ftblib-404465:8226927"
     annotationProcessor "curse.maven:ftbu-386134:7880472"
