@@ -60,7 +60,7 @@ public class MixinFTBUltimineClient {
      *
      * @param graphics  GUI 绘制上下文
      * @param tickDelta 部分刻插值
-     * @param ci        注入回调，成功执行则 {@code cancel()} 跳过原实现
+     * @param ci        注入回调, 成功执行则 {@code cancel()} 跳过原实现
      */
     @Inject(method = "renderGameOverlay", at = @At("HEAD"), cancellable = true)
     public void renderGameOverlay(GuiGraphics graphics, float tickDelta, CallbackInfo ci) {

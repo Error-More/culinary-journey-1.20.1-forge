@@ -6,6 +6,8 @@
   "refmap": "culinary_journey.refmap.json",
   "mixins": [
     "MixinBackupHandler",
+    "MixinStyle$Serializer",
+    "MixinTextUtils",
     "curtain.MixinEntityPlayerMPFake",
     "curtain.MixinPlayerCommand"
   ],

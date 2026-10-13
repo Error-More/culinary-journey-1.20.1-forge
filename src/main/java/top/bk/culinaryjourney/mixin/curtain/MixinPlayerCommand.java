@@ -61,18 +61,14 @@ public abstract class MixinPlayerCommand {
      * @throws CommandSyntaxException brigadier executes 需要的 Exception
      */
     @Unique
-    private static int culinary_journey_1_20_1_forge$rejoin(CommandContext<CommandSourceStack> context) throws CommandSyntaxException
-    {
+    private static int culinary_journey_1_20_1_forge$rejoin(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         // 设置线程变量
         FakePlayerRejoinHelper.isRejoin.set(true);
 
-        try
-        {
+        try {
             return spawn(context);
-        }
-        finally
-        {
-            // 执行后删除该线程
+        } finally {
+            // 执行后删除
             FakePlayerRejoinHelper.isRejoin.remove();
         }
     }

@@ -94,6 +94,14 @@ versionRange = "*"
 ordering = "AFTER"
 side = "BOTH"
 
+# FTB Quests
+[[dependencies."${mod_id}"]]
+modId = "ftbquests"
+mandatory = false
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
+
 # Mixin
 [[mixins]]
 config = "culinary_journey.mixins.json"
