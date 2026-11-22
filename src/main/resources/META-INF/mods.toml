@@ -102,6 +102,14 @@ versionRange = "*"
 ordering = "AFTER"
 side = "BOTH"
 
+# MaLiLib-Forge
+[[dependencies."${mod_id}"]]
+modId = "mafglib"
+mandatory = false
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
+
 # Mixin
 [[mixins]]
 config = "culinary_journey.mixins.json"

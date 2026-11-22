@@ -8,7 +8,7 @@ import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
 /**
  * Thirst 兼容性修复: 修复口渴值的水瓶堆叠兼容性问题.
- *
+ * <p>
  * Thirst 原本通过 Mixin Inject {@link net.minecraft.world.item.ItemStack#getMaxStackSize} HEAD 修改返回值实现.
  * Mixin 修改返回值极有可能导致兼容问题, 此处通过反射直接更改 {@link net.minecraft.world.item.Item#maxStackSize} 提供 Fallback 方案,
  */

@@ -19,8 +19,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.bk.culinaryjourney.integration.curtain.FakePlayerRejoinHelper;
 
 /**
- * Curtain 兼容性修复: Curtain 基于 Fabric Carpet, GCA, PCA, Carpet TIS Addition 却没有实现 Carpet TIS Addition 的 player 指令 rejoin 参数.
- *
+ * Curtain 兼容性修复 : Curtain 基于 Fabric Carpet, GCA, PCA, Carpet TIS Addition 却没有实现 Carpet TIS Addition 的 player 指令 rejoin 参数.
+ * <p>
  * 通过 Mixin 取消 spawn 的自动 {@code teleportTo} {@code fixStartingPosition} 在 {@link PlayerList#placeNewPlayer(Connection, ServerPlayer)} 后立刻设置维度.
  */
 @Mixin(EntityPlayerMPFake.class)
@@ -35,22 +35,13 @@ public class MixinEntityPlayerMPFake {
      * @param dimensionId 当前维度的 ResourceKey
      * @param worldIn     当前世界实例
      */
-    @Inject(
-            method = "createFakePlayer",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/server/players/PlayerList;m_11261_(Lnet/minecraft/network/Connection;Lnet/minecraft/server/level/ServerPlayer;)V",
-                    shift = At.Shift.AFTER
-            ),
-            remap = false
-    )
-    private static void adjustDimension(
-            CallbackInfoReturnable<EntityPlayerMPFake> cir,
+    @Inject(method = "createFakePlayer",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/server/players/PlayerList;m_11261_(Lnet/minecraft/network/Connection;Lnet/minecraft/server/level/ServerPlayer;)V", shift = At.Shift.AFTER), remap = false)
+    private static void adjustDimension(CallbackInfoReturnable<EntityPlayerMPFake> cir,
             @Local EntityPlayerMPFake instance,
             @Local(argsOnly = true) MinecraftServer server,
             @Local(argsOnly = true) LocalRef<ResourceKey<Level>> dimensionId,
-            @Local LocalRef<ServerLevel> worldIn
-    ) {
+            @Local LocalRef<ServerLevel> worldIn) {
         if (FakePlayerRejoinHelper.isRejoin.get()) {
             ResourceKey<Level> dimension = instance.level().dimension();
             dimensionId.set(dimension);
@@ -65,17 +56,11 @@ public class MixinEntityPlayerMPFake {
      * @param newValue Field 的 newValue
      * @return cancel  是否跳过
      */
-    @WrapWithCondition(
-            method = "createFakePlayer",
-            at = @At(
-                    value = "FIELD",
-                    target = "Ldev/dubhe/curtain/features/player/patches/EntityPlayerMPFake;fixStartingPosition:Ljava/lang/Runnable;",
-                    remap = false
-            ),
-            remap = false
-    )
-    private static boolean disableCarpetsLocationFixerOnRejoin(
-            EntityPlayerMPFake instance, Runnable newValue) {
+    @WrapWithCondition(method = "createFakePlayer",
+            at = @At(value = "FIELD",
+                    target = "Ldev/dubhe/curtain/features/player/patches/EntityPlayerMPFake;fixStartingPosition:Ljava/lang/Runnable;", remap = false), remap = false)
+    private static boolean disableCarpetsLocationFixerOnRejoin(EntityPlayerMPFake instance,
+                                                               Runnable newValue) {
         return !FakePlayerRejoinHelper.isRejoin.get();
     }
 
@@ -91,16 +76,9 @@ public class MixinEntityPlayerMPFake {
      * @param pitch       pitch 方向
      * @return cancel     是否跳过
      */
-    @WrapWithCondition(
-            method = "createFakePlayer",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Ldev/dubhe/curtain/features/player/patches/EntityPlayerMPFake;m_8999_(Lnet/minecraft/server/level/ServerLevel;DDDFF)V"
-            ),
-            remap = false
-    )
-    private static boolean dontRequestTeleport(
-            EntityPlayerMPFake instance, ServerLevel serverWorld,
+    @WrapWithCondition(method = "createFakePlayer",
+            at = @At(value = "INVOKE", target = "Ldev/dubhe/curtain/features/player/patches/EntityPlayerMPFake;m_8999_(Lnet/minecraft/server/level/ServerLevel;DDDFF)V"), remap = false)
+    private static boolean dontRequestTeleport(EntityPlayerMPFake instance, ServerLevel serverWorld,
             double x, double y, double z, float yaw, float pitch) {
         return !FakePlayerRejoinHelper.isRejoin.get();
     }

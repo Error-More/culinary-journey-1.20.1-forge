@@ -11,7 +11,7 @@ import top.bk.culinaryjourney.client.WindowTitle;
 
 /**
  * 单人世界开放 / 关闭局域网时通知 {@link WindowTitle} 刷新标题
- *
+ * <p>
  * 注入 {@code IntegratedServer#publishServer} 的返回处捕获开放，
  * 注入 {@code IntegratedServer#stopServer} 捕获关闭
  *

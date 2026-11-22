@@ -17,8 +17,8 @@ import top.bk.culinaryjourney.integration.curtain.FakePlayerRejoinHelper;
 import static net.minecraft.commands.Commands.literal;
 
 /**
- * Curtain 兼容性修复: Curtain 基于 Fabric Carpet, GCA, PCA, Carpet TIS Addition 却没有实现 Carpet TIS Addition 的 player 指令 rejoin 参数.
- *
+ * Curtain 兼容性修复 : Curtain 基于 Fabric Carpet, GCA, PCA, Carpet TIS Addition 却没有实现 Carpet TIS Addition 的 player 指令 rejoin 参数.
+ * <p>
  * 通过 Mixin Inject 注入 {@code register} 方法的 RETURN 获取 CommandDispatcher 额外为 player 命令注册 rejoin 参数.
  */
 @Mixin(value = PlayerCommand.class, remap = false)
@@ -50,7 +50,7 @@ public abstract class MixinPlayerCommand {
         CommandNode<CommandSourceStack> args = player.getChild("player");
         if (args == null) return;
 
-        args.addChild(literal("rejoin").executes(MixinPlayerCommand::culinary_journey_1_20_1_forge$rejoin).build());
+        args.addChild(literal("rejoin").executes(MixinPlayerCommand::culinary_journey$rejoin).build());
     }
 
     /**
@@ -61,7 +61,8 @@ public abstract class MixinPlayerCommand {
      * @throws CommandSyntaxException brigadier executes 需要的 Exception
      */
     @Unique
-    private static int culinary_journey_1_20_1_forge$rejoin(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+    private static int culinary_journey$rejoin(CommandContext<CommandSourceStack> context)
+            throws CommandSyntaxException {
         // 设置线程变量
         FakePlayerRejoinHelper.isRejoin.set(true);
 

@@ -37,7 +37,7 @@ public class CulinaryJourney {
 
     /**
      * 兼容性修复补丁初始化事件.
-     *
+     * <p>
      * {@link FMLCommonSetupEvent} 属于 ForgeMod 的生命周期事件之一.
      * 绝大多数生命周期时间都是并行的, 因此 {@link FMLCommonSetupEvent} 会被多个 Mod 同时接收.
      * 为了保证线程安全, 需要使用 {@link FMLCommonSetupEvent#enqueueWork(Runnable)} 来调用.

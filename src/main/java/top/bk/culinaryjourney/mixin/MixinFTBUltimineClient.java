@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * FTB Ultimine 兼容性修复: 实现 {@link FTBUltimineClient#renderGameOverlay(GuiGraphics, float)} 的 TODO (允许配置 HUD 位置偏移).
- *
+ * FTB Ultimine 兼容性修复 : 实现 {@link FTBUltimineClient#renderGameOverlay(GuiGraphics, float)} 的 TODO (允许配置 HUD 位置偏移).
+ * <p>
  * 通过 Mixin Inject 注入 {@code renderGameOverlay} 方法的 HEAD 跳过原本逻辑重新实现.
  */
 @Mixin(value = FTBUltimineClient.class, remap = false)
@@ -31,12 +31,12 @@ public class MixinFTBUltimineClient {
 
     /**
      * 纵向偏移配置项.
-     *
+     * <p>
      * 复用 FTB Ultimine 的 Config 接口, 可以直接通过 FTB Library 的 UI 界面进行配置.
-     * 哨兵值约定: 沿用 FTB 的逻辑 {@code -1} -1 表示未设置, 此时沿用原 FTB Ultimine 的默认位置 (2).
+     * 哨兵值约定 : 沿用 FTB 的逻辑 {@code -1} -1 表示未设置, 此时沿用原 FTB Ultimine 的默认位置 (2).
      */
     @Unique
-    private static final IntValue culinary_journey_1_20_1_forge$yOffset = FTBUltimineClientConfig.CONFIG.addInt("y_offset", -1).comment(new String[]{"Manual y offset of FTB Ultimine overlay, required for some modpacks"});
+    private static final IntValue culinary_journey$yOffset = FTBUltimineClientConfig.CONFIG.addInt("y_offset", -1).comment(new String[]{"Manual y offset of FTB Ultimine overlay, required for some modpacks"});
 
     /**
      * 按顺序把当前要显示的文本填入 {@code List}
@@ -80,7 +80,7 @@ public class MixinFTBUltimineClient {
 
                 // 检查 Offset 参数是否越界, 越界则 Fallback
                 int left = xOffset.get() >= 0 ? xOffset.get() : 2;
-                int top = culinary_journey_1_20_1_forge$yOffset.get() >= 0 ? culinary_journey_1_20_1_forge$yOffset.get() : 2;
+                int top = culinary_journey$yOffset.get() >= 0 ? culinary_journey$yOffset.get() : 2;
 
                 // 确保 HUD 的渲染不会超出范围
                 int maxTop = top + mc.font.lineHeight * list.size();

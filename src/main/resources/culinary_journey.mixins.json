@@ -6,10 +6,14 @@
   "refmap": "culinary_journey.refmap.json",
   "mixins": [
     "MixinBackupHandler",
+    "MixinBaseScreen",
     "MixinStyle$Serializer",
-    "MixinTextUtils",
+    "accessor.KeybindCategoryAccessor",
     "curtain.MixinEntityPlayerMPFake",
-    "curtain.MixinPlayerCommand"
+    "curtain.MixinPlayerCommand",
+    "ftbquests.MixinQuest",
+    "ftbquests.MixinTextUtils",
+    "ftbquests.MixinViewQuestPanel"
   ],
   "client": [
     "MixinFTBUltimineClient",
