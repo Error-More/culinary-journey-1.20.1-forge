@@ -16,6 +16,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * FTB Quests Markdown: 为 FTB Quests 的任务描述提供 Markdown 渲染.
@@ -25,10 +27,18 @@ import java.util.Optional;
  */
 public class MarkdownLink implements LinkHandler {
 
+    private static final Pattern STRING_TEXT_PATTERN = Pattern.compile("\"[\\s\\S]*\"");
+
     @Override
     public boolean onClick(LinkContext link) {
         String url = link.getUrl();
         URI uri;
+
+        Matcher matcher = STRING_TEXT_PATTERN.matcher(url);
+        if (matcher.find()) {
+            Minecraft.getInstance().keyboardHandler.setClipboard(matcher.group().replace("\"", ""));
+            return true;
+        }
 
         try {
             uri = new URI(url);
